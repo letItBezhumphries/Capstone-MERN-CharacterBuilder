@@ -1,68 +1,213 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: none;
+}
+
+/*  */
+
+:root {
+  --page-content-width: 92%;
+  --jet: rgba(51, 51, 51, 1);
+  --davys-gray: rgba(78, 78, 78, 1);
+  --battleship-gray: rgba(156, 156, 156, 1);
+  --silver: rgba(167, 167, 167, 1);
+  --cool-gray: #8695b2ff;
+  --battleship-gray-2: rgba(134, 134, 134, 1);
+  --drab-dark-brown: #554733ff;
+  --raisin-black: #29292bff;
+  --eerie-black: #1e2124ff;
+  --night: #0f0e10ff;
+  --magenta-pantone: #c8427bff;
+  --red-munsell: #ec193cff;
+  --burnt-sienna: #eb6739ff;
+}
+
+body,
+#root {
+  font-family: Arial, sans-serif;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 0;
+  padding: 0 0;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+#app {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+nav {
+  width: 100%;
+  height: 15%;
+  color: var(--davys-gray);
+  margin: 0 auto;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: hidden;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* the homepage link */
+nav a {
+  text-decoration: none;
+  color: var(--davys-gray);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+nav a:hover {
+  text-decoration: none;
+}
+
+nav ul {
+  list-style-type: none;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-right: 60px;
+  max-width: 60%;
+}
+
+.nav-header {
+  font-size: 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link a {
+  text-decoration: none;
+  color: var(--davys-gray);
+}
+
+.nav-link a:hover {
+  color: lightpink;
+}
+
+.page-header {
+  text-align: center;
+}
+
+.page-inner-container {
+  width: 96%;
+  margin: 10px auto 0;
+  background-color: var(--cool-gray);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 
+character page 
+*/
+
+.container {
+  background-color: white;
+  width: 40%;
+  height: 85vh;
+}
+
+.characters-list-container {
+}
+
+.character-view {
+  background-color: beige;
+  width: 80%;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.character-vitals {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.left {
+  width: 30%;
+  height: 100%;
+}
+
+.left input {
+  width: 100%;
+  height: 80%;
+}
+
+.right {
+  width: 70%;
+  height: 100%;
+}
+
+.right table {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: aqua;
+  padding: 0 0;
+  margin: 0 0;
+}
+
+.right tbody {
+  width: 100%;
+  height: 100%;
+}
+
+.right tr {
+  width: 100%;
+  height: 25%;
+  background-color: aliceblue;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+td select {
+  border: none;
+}
+
+.character-main {
+  background-color: burlywood;
+}
+
+.current-room-view {
+  background-color: var(--davys-gray);
+  width: 70%;
+  height: 40%;
+}
+
+.current-room-view tbody {
+  background-color: var(--davys-gray);
+}
+
+.dungeon-row {
+  border: 0.8px solid var(--jet);
+}
+
+.dungeon-square {
+  border: 0.8px solid dodgerblue;
+  background-color: antiquewhite;
 }

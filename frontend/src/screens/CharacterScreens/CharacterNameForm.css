@@ -1,0 +1,17 @@
+.character-name-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
+  margin-top: 40px;
+  border-bottom: 1px solid #f1f1f1;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.avatar-container {
+  border: 0.125rem dashed var(--cool-gray);
+  height: 5.5rem;
+  width: 5.5rem;
+  background-color: black;
+}

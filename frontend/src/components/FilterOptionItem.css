@@ -1,0 +1,43 @@
+.filter-option-item {
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  display: flex;
+  min-height: 53px;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.filter-option-item:hover {
+  cursor: pointer;
+}
+
+.filter-option-item img {
+  height: 40px;
+  width: 40px;
+  border-radius: 4px;
+}
+
+.option-heading {
+  flex: 1 1;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.option-heading .option-name {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.option-heading .option-text {
+  color: #75838b;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.option-selector-container {
+  height: 24px;
+  width: 24px;
+}

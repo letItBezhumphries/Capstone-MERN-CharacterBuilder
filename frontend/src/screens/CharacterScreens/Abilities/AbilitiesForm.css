@@ -1,0 +1,33 @@
+.ability-score-manager-standard {
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+}
+
+.ability-score-manager-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.ability-score-manager-stat {
+  width: 16.666667%;
+}
+
+.ability-score-total {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 10px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.ability-score-calculations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.ability-score-calculations .calculation-table {
+  width: calc(33.33333% - 10px);
+}
