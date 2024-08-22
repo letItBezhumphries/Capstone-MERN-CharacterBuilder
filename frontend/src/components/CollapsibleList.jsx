@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Accordion } from 'react-bootstrap';
+import { Accordion, Card } from 'react-bootstrap';
+
 import ContextAwareToggle from './ContextAwareToggle';
 import CardTable from './CardTable';
 
@@ -44,7 +45,33 @@ const CollapsibleList = ({ items }) => {
   return (
     <Accordion flush={true} className='list-container'>
       {items.map((item, idx) => (
-        <Accordion.Item eventKey={idx} key={idx}>
+        <Card key={idx}>
+          <Card.Header>
+            <ContextAwareToggle eventKey={idx} item={item}>
+              {item.name}
+            </ContextAwareToggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey={idx}>
+            <Card.Body>
+              <p>{item.desc}</p>
+              {item.table ? (
+                <>
+                  <p></p>
+                  <h5>{item.name}</h5>
+                  <CardTable tableHead={tableHead} tableCells={tableCells} />
+                </>
+              ) : null}
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      ))}
+    </Accordion>
+  );
+};
+
+export default CollapsibleList;
+
+/* <Accordion.Item eventKey={idx} key={idx}>
           <Accordion.Header>
             {item.name}
             <i className='fa-solid fa-chevron-up'></i>
@@ -60,10 +87,4 @@ const CollapsibleList = ({ items }) => {
               </>
             ) : null}
           </Accordion.Body>
-        </Accordion.Item>
-      ))}
-    </Accordion>
-  );
-};
-
-export default CollapsibleList;
+        </Accordion.Item> */

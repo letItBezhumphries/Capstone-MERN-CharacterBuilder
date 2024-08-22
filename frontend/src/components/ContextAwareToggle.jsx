@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import AccordionContext from 'react-bootstrap/AccordionContext';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 
-function ContextAwareToggle({ children, eventKey, callback }) {
+function ContextAwareToggle({ children, eventKey, callback, item }) {
   const { activeEventKey } = useContext(AccordionContext);
 
   const decoratedOnClick = useAccordionButton(
@@ -22,6 +22,11 @@ function ContextAwareToggle({ children, eventKey, callback }) {
       onClick={decoratedOnClick}
     >
       {children}
+      {isCurrentEventKey ? (
+        <i className='fa-solid fa-chevron-up' style={{ fill: 'yellow' }}></i>
+      ) : (
+        <i className='fa-solid fa-chevron-down' style={{ fill: 'purple' }}></i>
+      )}
     </button>
   );
 }

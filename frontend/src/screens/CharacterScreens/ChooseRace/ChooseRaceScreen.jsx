@@ -11,6 +11,7 @@ import './ChooseRaceScreen.css';
 const ChooseRaceScreen = () => {
   const [raceToConfirm, setRaceToConfirm] = useState({});
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [selectedRace, setSelectedRace] = useState(null);
 
   const handleClose = () => setShowConfirmation(false);
 
@@ -33,6 +34,23 @@ const ChooseRaceScreen = () => {
     setShowConfirmation(true);
   };
 
+  const handleConfirmSelection = (selection) => {
+    // send the selection to the store selection for race
+    console.log('in handleConfirmSelection:', selection);
+    // set the selectedRace
+    setSelectedRace({
+      name: selection.name,
+      index: selection.index,
+      imgSrc: selection.imgSrc,
+    });
+    // close the Confirmation Model
+    handleClose();
+  };
+
+  const handleCancelSelection = () => {
+    setShowConfirmation(false);
+  };
+
   return (
     <div id='chrace'>
       <CharacterBuilderStepMenu step0 step1></CharacterBuilderStepMenu>
@@ -48,7 +66,7 @@ const ChooseRaceScreen = () => {
               imgsrc={race.imgSrc}
               onSelectOption={handleOptionSelect}
               showConfirmation={showConfirmation}
-              selected={raceToConfirm}
+              optionSelected={raceToConfirm}
             />
           ))}
         </div>
@@ -58,7 +76,9 @@ const ChooseRaceScreen = () => {
         onHide={handleClose}
         isRace={true}
         isClass={false}
-        content={raceToConfirm}
+        selection={raceToConfirm}
+        onSelectionConfirm={handleConfirmSelection}
+        onSelectionCancel={handleCancelSelection}
         // handleClose={handleClose}
       />
     </div>

@@ -8,7 +8,7 @@ import {
   MONSTERS_APIURL,
   RACEAPIURL,
   CLASSAPIURL,
-} from '../constants/constants';
+} from '../constants/open5eApiConstants';
 
 const baseQuery = fetchBaseQuery({ baseUrl: MONSTERS_APIURL });
 

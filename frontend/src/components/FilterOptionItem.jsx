@@ -1,6 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
-import ConfirmationModal from './ConfirmationModal';
 import './FilterOptionItem.css';
 
 const FilterOptionItem = ({
@@ -11,14 +9,8 @@ const FilterOptionItem = ({
   onSelectOption,
   showConfirmation,
   closeConfirmation,
-  selected,
+  optionSelected,
 }) => {
-  // const [show, setShow] = useState(false);
-
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-  // console.log('in FilterOptionItem:', selected);
-
   const handleSelectionClick = () => {
     onSelectOption(index);
     // handleShow();
@@ -35,21 +27,13 @@ const FilterOptionItem = ({
           </span>
         </h3>
         <div className='option-selector-container'>
-          {selected ? (
+          {optionSelected ? (
             <i className='fa-solid fa-chevron-down'></i>
           ) : (
             <i className='fa-solid fa-chevron-right'></i>
           )}
         </div>
       </div>
-      {/* <ConfirmationModal
-        show={showConfirmation}
-        // onHide={handleClose}
-        onHide={closeConfirmation}
-        backdrop='static'
-        keyboard={false}
-        // handleClose={handleClose}
-      /> */}
     </>
   );
 };

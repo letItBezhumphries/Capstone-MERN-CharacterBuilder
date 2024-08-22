@@ -15,7 +15,6 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(pokemonApi.middleware)
       .concat(raceApi.middleware)
       .concat(characterClassApi.middleware)
       .concat(monstersApi.middleware),

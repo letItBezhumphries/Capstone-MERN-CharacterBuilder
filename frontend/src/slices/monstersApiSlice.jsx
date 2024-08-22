@@ -1,4 +1,7 @@
-import { MONSTERS_APIURL, MONSTERS_PAGE_APIURL } from '../constants/constants';
+import {
+  MONSTERS_APIURL,
+  MONSTERS_PAGE_APIURL,
+} from '../constants/open5eApiConstants';
 
 import { apiSlice } from './apiSlice';
 

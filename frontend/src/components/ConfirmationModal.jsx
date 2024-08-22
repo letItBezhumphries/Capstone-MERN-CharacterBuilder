@@ -14,14 +14,16 @@ function ConfirmationModal({
   handleClose,
   isRace,
   isClass,
-  content,
+  selection,
+  onSelectionConfirm,
+  onSelectionCancel,
 }) {
   const [raceDescription, setRaceDescription] = useState('');
   const [raceTraitsData, setRaceTraitsData] = useState('');
   const [traitNames, setTraitNames] = useState([]);
   const [traits, setTraits] = useState([]);
 
-  let { data, error, isLoading } = useGetDataForRaceQuery(content.index);
+  let { data, error, isLoading } = useGetDataForRaceQuery(selection.index);
   console.log('data in ConfirmationModal:', data);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ function ConfirmationModal({
         .filter((str) => str.length > 0);
 
       parsedTraits.forEach((str, index) => {
-        if (content.index === 'dragonborn') {
+        if (selection.index === 'dragonborn') {
           if (index > 0) {
             if (index === 1) {
               let name = str.split('._**')[0];
@@ -87,6 +89,14 @@ function ConfirmationModal({
     }
   }, [isLoading, data]);
 
+  const handleSelectionClick = (selection) => {
+    onSelectionConfirm(selection);
+  };
+
+  const handleCancelClick = (selection) => {
+    onSelectionCancel(selection);
+  };
+
   return (
     <>
       {show && !isLoading ? (
@@ -110,29 +120,33 @@ function ConfirmationModal({
             <Container className='modal-content' fluid>
               <Row className='confirmation-primary'>
                 <Col xs={12} md={8} className='confirmation-info'>
-                  <div className='form-page-header'>{content.name}</div>
+                  <div className='form-page-header'>{selection.name}</div>
                   <p className='description'>
                     {isRace ? raceDescription : null}
                   </p>
                 </Col>
                 <Col xs={6} md={4} className='confirmation-aside'>
-                  <img src={content.imgSrc} className='confirmation-img' />
+                  <img src={selection.imgSrc} className='confirmation-img' />
                 </Col>
               </Row>
               <Row className='full-width-row'>
                 <Col className='full-width-col'>
                   <div className='confirmation-summarylist'>
-                    <span>{isRace ? `Race Traits:` : 'Something Else'}</span>
-                    {isRace && traitNames.length > 0
-                      ? `${traitNames.join(', ')}`
-                      : null}
+                    <p>
+                      {isRace ? `Race Traits:` : 'Something Else'}
+                      <span>
+                        {isRace && traitNames.length > 0
+                          ? `${traitNames.join(', ')}`
+                          : null}
+                      </span>
+                    </p>
                   </div>
                 </Col>
               </Row>
               <Row className='full-width-row'>
                 <Col className='full-width-col'>
                   <h3 className='secondary-title'>
-                    {isRace ? `${content.name} Traits` : 'Class Traits'}
+                    {isRace ? `${selection.name} Traits` : 'Class Traits'}
                   </h3>
                   <div className='secondary-detailslist'>
                     {isRace && traits.length > 0 ? (
@@ -144,10 +158,10 @@ function ConfirmationModal({
             </Container>
           </Modal.Body>
           <Modal.Footer className='confirmation-footer'>
-            <Button onClick={close} className='cancel-btn'>
+            <Button onClick={handleCancelClick} className='cancel-btn'>
               Cancel
             </Button>
-            <Button onClick={close} className='choose-btn'>
+            <Button onClick={handleSelectionClick} className='choose-btn'>
               {isRace ? 'Choose Race' : 'Choose Class'}
             </Button>
           </Modal.Footer>

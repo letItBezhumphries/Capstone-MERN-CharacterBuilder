@@ -35,6 +35,7 @@
   font-size: 24px;
 }
 .confirmation-info .description {
+  letter-spacing: normal;
 }
 
 .confirmation-aside {
@@ -53,11 +54,17 @@
 
 .confirmation-summarylist {
   border-bottom: 0.6px solid lightgrey;
-  margin-top: 1rem;
-  font-weight: 300;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  letter-spacing: normal;
 }
 
 .confirmation-summarylist span {
+  font-weight: 300;
+  margin-left: 5px;
+}
+
+.confirmation-summarylist p {
   font-weight: 700;
 }
 
@@ -87,7 +94,7 @@
 }
 
 .full-width-row {
-  background-color: yellow;
+  /* background-color: yellow; */
   width: 100% !important;
   margin-right: 0px !important;
   margin-left: 0px !important;
@@ -99,6 +106,14 @@
   margin: 0 0 !important;
   padding-right: 0px !important;
   padding-left: 0px !important;
+}
+
+.full-width-col h3 {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: normal;
+  margin: 17px 0 5px;
 }
 
 .confirmation-footer {
@@ -132,17 +147,35 @@
   margin-top: 30px;
 }
 
-.accordion-item,
+.card,
+.card-header {
+  width: 100%;
+  background-color: #fff;
+  padding: 0 0;
+  margin: 0 0;
+}
+
+.card-header {
+  background-color: #fff;
+  border: none;
+  width: 100%;
+  padding: 0 0 !important;
+  margin: 0 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+/* .accordion-item,
 .accordion-header,
 .accordion-button,
 .accordion-collapse {
   width: 100%;
   background-color: #fff;
-}
+} */
 
-.accordion-button {
+.card-header button {
   display: flex;
-  height: 100%;
+  width: 100%;
   height: 65px;
   padding: 0 16px;
   display: flex;
@@ -150,17 +183,11 @@
   justify-content: space-between;
 }
 
-.accordion-button:focus {
+.card-header button:focus {
   outline: none;
 }
 
-.accordion-header {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.1;
-}
-
-.accordion-body {
+.card-body {
   background-color: #fff;
   border-left: 1px solid #ece9e9;
   border-right: 1px solid #ece9e9;
@@ -171,17 +198,17 @@
   /* top: -10px; */
 }
 
-.accordion-body p {
+.card-body p {
   margin: 0 0 25px;
 }
 
-.accordion-body h5 {
+.card-body h5 {
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 1.5px;
 }
 
-.accordion-body table {
+.card-body table {
   border: 1px solid #edeae8;
   border-collapse: collapse;
   margin: 20px 0;
@@ -189,7 +216,7 @@
   border-spacing: 0;
 }
 
-.accordion-body th {
+.card-body th {
   background: #fff;
   border: 1px solid #edeae8;
   border-bottom: 2px solid #d0cac5;
@@ -201,11 +228,11 @@
   text-align: left;
 }
 
-.accordion-body tr:nth-child(odd) td {
+.card-body tr:nth-child(odd) td {
   background-color: #faf8f7;
 }
 
-.accordion-body td {
+.card-body td {
   background-color: #fff;
   border: 1px solid #edeae8;
   line-height: 1.3;
