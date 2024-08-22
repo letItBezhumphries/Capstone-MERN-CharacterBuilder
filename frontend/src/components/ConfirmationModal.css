@@ -93,6 +93,13 @@
   margin: 0 0;
 }
 
+.overview-container {
+  width: 100%;
+  padding: 0 0;
+  margin: 0 0;
+  background-color: purple;
+}
+
 .full-width-row {
   /* background-color: yellow; */
   width: 100% !important;
@@ -165,13 +172,6 @@
   font-weight: 500;
   line-height: 1.1;
 }
-/* .accordion-item,
-.accordion-header,
-.accordion-button,
-.accordion-collapse {
-  width: 100%;
-  background-color: #fff;
-} */
 
 .card-header button {
   display: flex;

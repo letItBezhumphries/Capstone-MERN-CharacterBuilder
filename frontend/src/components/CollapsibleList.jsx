@@ -5,19 +5,23 @@ import { Accordion, Card } from 'react-bootstrap';
 import ContextAwareToggle from './ContextAwareToggle';
 import CardTable from './CardTable';
 
-const CollapsibleList = ({ items }) => {
+const CollapsibleList = ({ items, isLoading, selection }) => {
   const [tableCells, setTableCells] = useState();
   const [tableHead, setTableHead] = useState();
-  const itemTable = items.find((item) => item.table.length > 0);
-  const tableStr = itemTable.table;
+  // console.log('selection:', selection);
+  // // const itemTable = items.find((item) => item.index === 'dragonborn');
+  // const itemTable = items.filter((item) => item.index === 'dragonborn')[0];
+  // console.log('itemTable:', itemTable);
+  // const tableStr = itemTable.table;
 
   useEffect(() => {
-    if (tableStr.length > 0) {
-      parseTableString();
+    if (isLoading && selection.table) {
+      // console.log('true dragonboarn', selection.table, 'isloading:', isLoading);
+      parseTableString(selection.table);
     }
-  }, [tableStr]);
+  }, [selection, isLoading]);
 
-  const parseTableString = () => {
+  const parseTableString = (tableStr) => {
     const output = [];
     let splitTable = tableStr
       .split('|')
@@ -70,21 +74,3 @@ const CollapsibleList = ({ items }) => {
 };
 
 export default CollapsibleList;
-
-/* <Accordion.Item eventKey={idx} key={idx}>
-          <Accordion.Header>
-            {item.name}
-            <i className='fa-solid fa-chevron-up'></i>
-            <i className='fa-solid fa-chevron-down'></i>
-          </Accordion.Header>
-          <Accordion.Body>
-            <p>{item.desc}</p>
-            {item.table ? (
-              <>
-                <p></p>
-                <h5>{item.name}</h5>
-                <CardTable tableHead={tableHead} tableCells={tableCells} />
-              </>
-            ) : null}
-          </Accordion.Body>
-        </Accordion.Item> */

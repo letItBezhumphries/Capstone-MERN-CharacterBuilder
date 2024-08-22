@@ -15,6 +15,7 @@ function ContextAwareToggle({ children, eventKey, callback, item }) {
   return (
     <button
       type='button'
+      className=''
       style={{
         backgroundColor: isCurrentEventKey ? 'yellow' : 'green',
         color: isCurrentEventKey ? 'white' : 'black',

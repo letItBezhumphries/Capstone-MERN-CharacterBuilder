@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import CollapsibleList from './CollapsibleList';
 import { useGetDataForRaceQuery } from '../services/races';
+import PageContainer from './PageContainer';
 import './ConfirmationModal.css';
 
 function ConfirmationModal({
@@ -24,7 +25,8 @@ function ConfirmationModal({
   const [traits, setTraits] = useState([]);
 
   let { data, error, isLoading } = useGetDataForRaceQuery(selection.index);
-  console.log('data in ConfirmationModal:', data);
+  // console.log('in confirmationModal selection:', selection);
+  // console.log('data in ConfirmationModal:', data);
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -76,21 +78,20 @@ function ConfirmationModal({
 
       setTraitNames([...raceTraitNames]);
       setTraits([...selectedRaceTraits]);
-      // console.log(
-      //   'useEffect -> traitName:',
-      //   traitNames,
-      //   '\nraceDescription;',
-      //   raceDescription,
-      //   'traits:',
-      //   traits,
-      //   '\nraceTraitData:',
-      //   raceTraitsData
-      // );
     }
   }, [isLoading, data]);
 
-  const handleSelectionClick = (selection) => {
-    onSelectionConfirm(selection);
+  const handleSelectionClick = () => {
+    // create a new object with all properties included
+    const selectionData = {
+      ...selection,
+      traits: traits,
+      traitList: traitNames,
+      desc: raceDescription,
+      data: raceTraitsData,
+    };
+
+    onSelectionConfirm(selectionData);
   };
 
   const handleCancelClick = (selection) => {
@@ -114,48 +115,17 @@ function ConfirmationModal({
             <Modal.Title className='confirmation-title'>
               CONFIRM RACE
             </Modal.Title>
-            {/* <h3>CONFIRM RACE</h3> */}
           </Modal.Header>
           <Modal.Body className='modal-body'>
-            <Container className='modal-content' fluid>
-              <Row className='confirmation-primary'>
-                <Col xs={12} md={8} className='confirmation-info'>
-                  <div className='form-page-header'>{selection.name}</div>
-                  <p className='description'>
-                    {isRace ? raceDescription : null}
-                  </p>
-                </Col>
-                <Col xs={6} md={4} className='confirmation-aside'>
-                  <img src={selection.imgSrc} className='confirmation-img' />
-                </Col>
-              </Row>
-              <Row className='full-width-row'>
-                <Col className='full-width-col'>
-                  <div className='confirmation-summarylist'>
-                    <p>
-                      {isRace ? `Race Traits:` : 'Something Else'}
-                      <span>
-                        {isRace && traitNames.length > 0
-                          ? `${traitNames.join(', ')}`
-                          : null}
-                      </span>
-                    </p>
-                  </div>
-                </Col>
-              </Row>
-              <Row className='full-width-row'>
-                <Col className='full-width-col'>
-                  <h3 className='secondary-title'>
-                    {isRace ? `${selection.name} Traits` : 'Class Traits'}
-                  </h3>
-                  <div className='secondary-detailslist'>
-                    {isRace && traits.length > 0 ? (
-                      <CollapsibleList items={traits} />
-                    ) : null}
-                  </div>
-                </Col>
-              </Row>
-            </Container>
+            <PageContainer
+              isModal={true}
+              isRace={true}
+              selection={selection}
+              isLoading={isLoading}
+              traits={traits}
+              traitNames={traitNames}
+              description={raceDescription}
+            />
           </Modal.Body>
           <Modal.Footer className='confirmation-footer'>
             <Button onClick={handleCancelClick} className='cancel-btn'>
