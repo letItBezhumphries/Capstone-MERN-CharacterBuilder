@@ -103,8 +103,12 @@
 .secondary-listitem {
 }
 
+.modal-dialog-scrollable .modal-content {
+  overflow: scroll;
+}
+
 .modal-content {
-  background-color: beige;
+  /* background-color: beige; */
   width: 100%;
   padding: 0 0;
   margin: 0 0;

@@ -17,10 +17,7 @@ const PageContainer = ({
   //  traits is the prop we want to pass to collapsibleItems
 
   return (
-    <Container
-      className={isModal ? 'modal-content' : 'overview-container'}
-      fluid
-    >
+    <Container className={isModal ? 'modal-content' : 'overview-container'}>
       <Row className={isModal ? 'confirmation-primary' : 'overview-primary'}>
         <Col
           xs={'auto'}
