@@ -4,9 +4,10 @@
   "main": "index.js",
   "scripts": {
     "client": "npm run dev --prefix client",
-    "start": "nodemon index.js -w",
-    "data:import": "node db/seeder",
-    "data:destroy": "node db/seeder -d"
+    "server": "nodemon backend/index.js -w",
+    "devstart": "concurrently \"npm run server\" \"npm run dev\"",
+    "data:import": "node backend/db/seeder",
+    "data:destroy": "node backend/db/seeder -d"
   },
   "keywords": [],
   "author": "Eric Humphries",
@@ -14,17 +15,20 @@
   "description": "D&D Dungeon builder application built with nodejs express mongoose and mongodb backend",
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "colors": "^1.4.0",
+    "concurrently": "^8.2.2",
+    "morgan": "^1.10.0",
     "nodemon": "^3.1.4"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
     "express-validator": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.5.3"
+    "mongoose": "^8.5.3",
+    "multer": "^1.4.5-lts.1"
   }
 }

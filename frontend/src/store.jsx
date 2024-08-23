@@ -1,20 +1,20 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { pokemonApi } from './services/pokemon';
+import { backendApi } from './slices/backendApiSlice';
 import { raceApi } from './services/races';
 import { characterClassApi } from './services/classes';
 import { monstersApi } from './services/monsters';
 import {
-  characterFormReducer,
-  setNameStep,
-  setRaceStep,
-} from './slices/characterFormSlice';
+  characterFormStepReducer,
+  addNameStep,
+  addRaceStep,
+} from './slices/characterFormStepSlice';
 
 const rootReducer = combineReducers({
-  [pokemonApi.reducerPath]: pokemonApi.reducer,
+  [backendApi.reducerPath]: backendApi.reducer,
   [monstersApi.reducerPath]: monstersApi.reducer,
   [characterClassApi.reducerPath]: characterClassApi.reducer,
   [raceApi.reducerPath]: raceApi.reducer,
-  characterForm: characterFormReducer,
+  characterForm: characterFormStepReducer,
 });
 
 const store = configureStore({
@@ -23,7 +23,9 @@ const store = configureStore({
     getDefaultMiddleware()
       .concat(raceApi.middleware)
       .concat(characterClassApi.middleware)
-      .concat(monstersApi.middleware),
+      .concat(monstersApi.middleware)
+      .concat(backendApi.middleware),
+  devTools: true,
 });
 
-export { store, setNameStep, setRaceStep };
+export { store, addNameStep, addRaceStep };

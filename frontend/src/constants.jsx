@@ -20,5 +20,3 @@ export const USERS_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:5005/api/users'
     : '';
-
-export const OPENDDAPIURL = '';
