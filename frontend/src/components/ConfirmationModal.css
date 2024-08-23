@@ -12,7 +12,19 @@
   display: flex;
   height: 60px;
   padding: 15px;
+  justify-content: space-between;
   color: #fff !important;
+}
+
+.confirmation-header button {
+  background-color: #262e37;
+  outline: none;
+  padding: 0 0;
+  border: none;
+}
+
+.confirmation-header button:focus {
+  outline: none;
 }
 
 .h4 {
@@ -75,6 +87,11 @@
 .secondary-title {
 }
 
+.traitlist {
+  border-bottom: 1px solid #f1f1f1;
+  padding-bottom: 20px;
+}
+
 .secondary-detailslist {
   /* padding-top: 20px; */
   /* background-color: burlywood; */
@@ -97,22 +114,83 @@
   width: 100%;
   padding: 0 0;
   margin: 0 0;
-  background-color: purple;
+}
+
+.overview-primary {
+  /* background-color: green; */
+  display: flex;
+
+  padding: 0 15px;
+  margin: 0 0;
+}
+
+.selection-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.selection-info .description {
+  margin: 0 0 15px;
+  font-size: 13px;
+  font-size: 300;
+}
+
+.selection-info strong {
+  font-weight: 700;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.selection-info span {
+  font-size: 12px;
+}
+
+.selection-aside {
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.selection-aside img {
+  margin-bottom: 20px;
+}
+
+.selection-aside button {
+  background-color: #fff;
+  color: dodgerblue;
+  border: none;
+  outline: none;
+}
+
+.select-alert-badge {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30%;
+  background-color: dodgerblue;
+}
+
+.selection-aside button:focus {
+  outline: none;
+  border: none;
 }
 
 .full-width-row {
   /* background-color: yellow; */
   width: 100% !important;
-  margin-right: 0px !important;
-  margin-left: 0px !important;
+  /* margin-right: 0px !important;
+  margin-left: 0px !important; */
   padding: 0 0 !important;
 }
 
 .full-width-col {
   width: 100%;
   margin: 0 0 !important;
-  padding-right: 0px !important;
-  padding-left: 0px !important;
 }
 
 .full-width-col h3 {
@@ -121,6 +199,10 @@
   line-height: 1.5;
   letter-spacing: normal;
   margin: 17px 0 5px;
+}
+
+.secondary-title {
+  padding: 0 15px;
 }
 
 .confirmation-footer {
@@ -146,18 +228,28 @@
   color: #fff;
 }
 
-.list-container {
+.collapsiblelist-container {
   /* background-color: red; */
   width: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 30px;
+  padding: 0 15px;
+}
+
+.collapse-button {
+  margin-bottom: 15px;
+  background: url('../assets/backgroundColor.png');
+}
+
+.select-trait-option {
+  width: 100%;
+  height: 35px;
 }
 
 .card,
 .card-header {
   width: 100%;
-  background-color: #fff;
   padding: 0 0;
   margin: 0 0;
 }
@@ -171,6 +263,9 @@
   font-size: 15px;
   font-weight: 500;
   line-height: 1.1;
+  background: url('../assets/backgroundColor.jpeg.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .card-header button {
@@ -195,6 +290,7 @@
   line-height: 1.7;
   margin: 0 2px;
   padding: 20px 15px;
+  min-height: 300px;
   /* top: -10px; */
 }
 

@@ -7,11 +7,12 @@ const FormContainer = ({ children, sm }) => {
       style={
         sm === true
           ? { height: '30%', marginBottom: '40px' }
-          : { height: 'auto', marginBottom: '40px' }
+          : { height: '100%', marginBottom: '20px' }
       }
     >
       <Row className='justify-content-md-center'>
-        <Col>{children}</Col>
+        {/* <Col>{children}</Col> */}
+        <div>{children}</div>
       </Row>
     </Container>
   );

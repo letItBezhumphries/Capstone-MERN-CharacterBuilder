@@ -12,7 +12,9 @@ const CharacterNameForm = ({ avatar }) => {
         <div className='avatar-container'>
           {!hasAvatar ? (
             <div className='avatar-placeholder'>
-              <i className='fa-solid fa-circle-user'></i>
+              <i className='fa-solid fa-circle-user fa-2xl'>
+                <span style={{ color: '#fff' }}>+</span>
+              </i>
             </div>
           ) : (
             <img className='avatar' src='' alt='' />

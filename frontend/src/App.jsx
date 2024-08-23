@@ -9,6 +9,7 @@ import DungeonScreen from './screens/DungeonScreen';
 import CharacterScreen from './screens/CharacterScreens/CharacterScreen';
 import ChooseRaceScreen from './screens/CharacterScreens/ChooseRace/ChooseRaceScreen';
 import ChooseClassScreen from './screens/CharacterScreens/ChooseClass/ChooseClassScreen';
+import ChooseAbilitiesScreen from './screens/CharacterScreens/ChooseAbilities/ChooseAbilitiesScreen';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,11 @@ function App() {
           ></Route>
           <Route
             path='/character/chclass'
+            element={<ChooseClassScreen />}
+            exact
+          ></Route>
+          <Route
+            path='/character/chabilities'
             element={<ChooseClassScreen />}
             exact
           ></Route>

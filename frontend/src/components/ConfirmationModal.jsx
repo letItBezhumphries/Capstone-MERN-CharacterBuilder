@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import CollapsibleList from './CollapsibleList';
 import { useGetDataForRaceQuery } from '../services/races';
 import PageContainer from './PageContainer';
+import { getTableSelectOptions } from '../utility/parseTableString';
 import './ConfirmationModal.css';
 
 function ConfirmationModal({
@@ -23,6 +24,7 @@ function ConfirmationModal({
   const [raceTraitsData, setRaceTraitsData] = useState('');
   const [traitNames, setTraitNames] = useState([]);
   const [traits, setTraits] = useState([]);
+  const [tableData, setTableData] = useState();
 
   let { data, error, isLoading } = useGetDataForRaceQuery(selection.index);
   // console.log('in confirmationModal selection:', selection);
@@ -47,12 +49,20 @@ function ConfirmationModal({
               let name = str.split('._**')[0];
               let description = str.split('._**')[1];
               let table = parsedTraits[0].split('**')[2];
+
+              let parsedTableStr = getTableSelectOptions(table);
+              console.log('tableOptions:', parsedTableStr);
+
               if (!raceTraitNames.includes(name)) {
                 raceTraitNames.push(name);
                 selectedRaceTraits.push({
                   name: name,
                   desc: description,
                   table: table,
+                  isChoice: true,
+                  choices: parsedTableStr.tableOptions,
+                  headCells: parsedTableStr.headCells,
+                  tableCells: parsedTableStr.tableCells,
                 });
               }
               // its greater than 1
@@ -71,7 +81,23 @@ function ConfirmationModal({
           let description = str.split('._**')[1];
           if (!raceTraitNames.includes(name)) {
             raceTraitNames.push(name);
-            selectedRaceTraits.push({ name: name, desc: description });
+            // if the word 'choice' is found in the description then we need to set up choices to select in the overview page
+            if (description.split(' ').indexOf('choice:') !== -1) {
+              let choices = description
+                .split(':')[1]
+                .split(/,|or/g)
+                .filter((str) => str !== ' ')
+                .join(',');
+              console.log('description with choice:', choices.split(','));
+              selectedRaceTraits.push({
+                name: name,
+                desc: description,
+                isChoice: true,
+                choices: choices.split(','),
+              });
+            } else {
+              selectedRaceTraits.push({ name: name, desc: description });
+            }
           }
         }
       });
@@ -107,14 +133,21 @@ function ConfirmationModal({
           scrollable={true}
           keyboard={false}
           show={show}
-          onHide={onHide}
+          onHide={() => handleClose()}
           close={handleClose}
+          fullscreen={true}
           // make fullscreen
         >
-          <Modal.Header className='confirmation-header' closeButton>
+          <Modal.Header className='confirmation-header'>
             <Modal.Title className='confirmation-title'>
               CONFIRM RACE
             </Modal.Title>
+            <button className='close-btn' onClick={handleClose}>
+              <i
+                className='fa-solid fa-x fa-2xl'
+                style={{ color: 'white' }}
+              ></i>
+            </button>
           </Modal.Header>
           <Modal.Body className='modal-body'>
             <PageContainer

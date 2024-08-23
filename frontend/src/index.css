@@ -121,19 +121,9 @@ nav ul {
 character page 
 */
 
-.container {
-  background-color: white;
-  width: 40%;
-  height: 85vh;
-}
-
-.characters-list-container {
-}
-
 .character-view {
   background-color: beige;
   width: 80%;
-  height: 85vh;
   display: flex;
   flex-direction: column;
 }

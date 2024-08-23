@@ -1,6 +1,11 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import CharacterBuilderStepMenu from '../CharacterBuilderStepMenu';
+import ConfirmationModal from '../../../components/ConfirmationModal';
+import FilterOptionItem from '../../../components/FilterOptionItem';
 import FormContainer from '../../../components/FormContainer';
-import OptionItem from '../../../components/FilterOptionItem';
+import CharacterNameForm from '../CharacterNameForm';
+import PageContainer from '../../../components/PageContainer';
 import { useGetClassDataQuery } from '../../../services/classes';
 import { characterClasses } from '../../../data/selectors';
 

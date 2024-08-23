@@ -38,7 +38,7 @@ const CharacterBuilderStepMenu = ({
       </Nav.Item>
       <Nav.Item>
         {step0 ? (
-          <LinkContainer to='/chclass'>
+          <LinkContainer to='/character/chclass'>
             <Nav.Link className='character-builder-menulink'>2. CLASS</Nav.Link>
           </LinkContainer>
         ) : (
@@ -46,8 +46,9 @@ const CharacterBuilderStepMenu = ({
         )}
       </Nav.Item>
       <Nav.Item>
-        {step3 ? (
-          <LinkContainer to='/chability'>
+        {/*  REMEMEMBER NEED TO CHANGE THIS BACK TO PROPER STEPS NEEDED TO HIT ROUTE */}
+        {step0 ? (
+          <LinkContainer to='/character/chabilities'>
             <Nav.Link className='character-builder-menulink'>
               3. ABILITES
             </Nav.Link>

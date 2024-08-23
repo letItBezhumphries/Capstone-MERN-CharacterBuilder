@@ -1,53 +1,31 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import ContextAwareToggle from './ContextAwareToggle';
 import CardTable from './CardTable';
 
-const CollapsibleList = ({ items, isLoading, selection }) => {
-  const [tableCells, setTableCells] = useState();
-  const [tableHead, setTableHead] = useState();
-  // console.log('selection:', selection);
-  // // const itemTable = items.find((item) => item.index === 'dragonborn');
-  // const itemTable = items.filter((item) => item.index === 'dragonborn')[0];
-  // console.log('itemTable:', itemTable);
-  // const tableStr = itemTable.table;
+const CollapsibleList = ({ items, selection, isModal }) => {
+  console.log(
+    'true dragonboarn in CollapsList',
+    items,
+    'is it a modal:',
+    isModal
+  );
 
-  useEffect(() => {
-    if (isLoading && selection.table) {
-      // console.log('true dragonboarn', selection.table, 'isloading:', isLoading);
-      parseTableString(selection.table);
-    }
-  }, [selection, isLoading]);
-
-  const parseTableString = (tableStr) => {
-    const output = [];
-    let splitTable = tableStr
-      .split('|')
-      .filter((str) => str.indexOf('-') === -1)
-      .filter((str) => str.indexOf('\n') === -1);
-
-    let tableHeadCells = splitTable.slice(0, 3).map((str) => str.trim());
-    setTableHead(tableHeadCells);
-
-    let tableCells = splitTable.slice(3).map((str) => str.trim());
-    let lastCellIndex = tableCells.length - 1;
-
-    let first = 0;
-    let last = 3;
-    while (last <= lastCellIndex) {
-      let currentRow = tableCells.slice(first, last);
-      output.push(currentRow);
-      first += 3;
-      last += 3;
-    }
-    setTableCells(output);
-    return output;
+  const renderOptions = (item) => {
+    return item.choices.map((choice, idx) => {
+      console.log('choice:', choice);
+      return <option key={idx}>{choice}</option>;
+    });
   };
 
   return (
-    <Accordion flush={true} className='list-container'>
+    <Accordion
+      flush={true}
+      className='collapsiblelist-container'
+      alwaysOpen={true}
+    >
       {items.map((item, idx) => (
         <Card key={idx}>
           <Card.Header>
@@ -62,9 +40,20 @@ const CollapsibleList = ({ items, isLoading, selection }) => {
                 <>
                   <p></p>
                   <h5>{item.name}</h5>
-                  <CardTable tableHead={tableHead} tableCells={tableCells} />
+                  <CardTable
+                    tableHead={item.headCells}
+                    tableCells={item.tableCells}
+                  />
                 </>
               ) : null}
+              <div>
+                {!isModal && item.choices ? (
+                  <Form.Select className='select-trait-option'>
+                    <option>- Choose an Option -</option>
+                    {renderOptions(item)}
+                  </Form.Select>
+                ) : null}
+              </div>
             </Card.Body>
           </Accordion.Collapse>
         </Card>
