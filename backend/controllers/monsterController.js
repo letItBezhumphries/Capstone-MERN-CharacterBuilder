@@ -1,7 +1,7 @@
 const Monster = require('../models/Monster');
 
 // @desc:  fetch all Monsters
-// @route:  GET /api/Monsters
+// @route:  GET /api/monsters
 // @access:  Public
 const getMonsters = async (req, res, next) => {
   try {
