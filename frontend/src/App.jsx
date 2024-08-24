@@ -1,7 +1,5 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import { useDispatch } from 'react-redux';
-import { getAllMonsters } from './actions/monsterActions';
 import { Routes, Route } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import MonstersScreen from './screens/MonstersScreen/MonstersScreen';
@@ -11,10 +9,9 @@ import ChooseRaceScreen from './screens/CharacterBuilderScreens/ChooseRace/Choos
 import ChooseClassScreen from './screens/CharacterBuilderScreens/ChooseClass/ChooseClassScreen';
 import ChooseAbilitiesScreen from './screens/CharacterBuilderScreens/ChooseAbilities/ChooseAbilitiesScreen';
 import CharacterDetailsScreen from './screens/CharacterDetailsScreen/CharacterDetailsScreen';
+import LoginScreen from './screens/LoginScreen';
 
 function App() {
-  const dispatch = useDispatch();
-  // dispatch(getAllMonsters());
   return (
     <div id='app'>
       <Navbar />
@@ -23,7 +20,6 @@ function App() {
           <Route path='/' element={<HomeScreen />} exact></Route>
           <Route path='/monsters' element={<MonstersScreen />} exact></Route>
           <Route path='/character' element={<CharacterScreen />} exact></Route>
-
           <Route
             path='/character/chrace'
             element={<ChooseRaceScreen />}
@@ -44,6 +40,7 @@ function App() {
             element={<CharacterDetailsScreen />}
             exact
           ></Route>
+          <Route path='/login' element={<LoginScreen />} exact></Route>
           <Route path='/dungeons' element={<DungeonScreen />} exact></Route>
         </Routes>
       </div>
