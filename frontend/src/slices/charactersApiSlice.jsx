@@ -5,13 +5,13 @@ export const charactersApiSlice = backendApi.injectEndpoints({
   endpoints: (builder) => ({
     getCharacters: builder.query({
       query: () => ({
-        url: CHARACTERS_URL,
+        url: `${CHARACTERS_URL}`,
       }),
       keepUnusedDataFor: 5,
     }),
     getCharacterDetails: builder.query({
-      query: (chrId) => ({
-        url: `${CHARACTERS_URL}/${chrId}`,
+      query: (id) => ({
+        url: `${CHARACTERS_URL}/${id}`,
       }),
       keepUnusedDataFor: 5,
     }),

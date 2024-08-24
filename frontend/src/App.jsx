@@ -1,6 +1,9 @@
 import './App.css';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import HomeScreen from './screens/HomeScreen';
 import MonstersScreen from './screens/MonstersScreen/MonstersScreen';
 import DungeonScreen from './screens/DungeonScreen';
@@ -19,7 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomeScreen />} exact></Route>
           <Route path='/monsters' element={<MonstersScreen />} exact></Route>
-          <Route path='/character' element={<CharacterScreen />} exact></Route>
+          <Route path='/character' element={<CharacterScreen />}></Route>
           <Route
             path='/character/chrace'
             element={<ChooseRaceScreen />}
@@ -44,6 +47,8 @@ function App() {
           <Route path='/dungeons' element={<DungeonScreen />} exact></Route>
         </Routes>
       </div>
+      <Footer />
+      <ToastContainer />
     </div>
   );
 }

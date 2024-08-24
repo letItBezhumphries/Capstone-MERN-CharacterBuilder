@@ -16,6 +16,7 @@ const rootReducer = combineReducers({
   [characterClassApi.reducerPath]: characterClassApi.reducer,
   [raceApi.reducerPath]: raceApi.reducer,
   characterForm: characterFormStepReducer,
+  auth: authSliceReducer,
 });
 
 const store = configureStore({
