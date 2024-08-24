@@ -17,9 +17,31 @@ export const charactersApiSlice = backendApi.injectEndpoints({
     }),
     createCharacter: builder.mutation({
       query: (character) => ({
-        url: `${CHARACTERS_URL}/new`,
+        url: `${CHARACTERS_URL}/new/${character.userId}`,
         method: 'POST',
         body: { ...character },
+      }),
+    }),
+    initCreateCharacter: builder.mutation({
+      query: () => ({
+        url: `${CHARACTERS_URL}/new`,
+        method: 'POST',
+      }),
+      // invalidateTags will stop this from getting cached since will use update instead and it wont cause page to refresh
+      invalidatesTags: ['Character'],
+    }),
+    updateCharacter: builder.mutation({
+      query: (character) => ({
+        url: `${CHARACTERS_URL}/${character.id}`,
+        method: 'PUT',
+        body: { ...character },
+      }),
+    }),
+    deleteCharacter: builder.mutation({
+      query: (id) => ({
+        url: `${CHARACTERS_URL}/${id}`,
+        method: 'DELETE',
+        body: { id },
       }),
     }),
   }),
@@ -30,4 +52,7 @@ export const {
   useGetCharactersQuery,
   useGetCharacterDetailsQuery,
   useCreateCharacterMutation,
+  useInitCreateCharacterMutation,
+  useUpdateCharacterMutation,
+  useDeleteCharacterMutation,
 } = charactersApiSlice;

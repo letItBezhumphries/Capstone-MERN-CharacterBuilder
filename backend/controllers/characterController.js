@@ -86,7 +86,7 @@ const createNewCharacter = async (req, res, next) => {
 };
 
 // Update route - update a character by id
-// @route    PUT characters/:id
+// @route    PUT /api/characters/:id
 // @desc     update a character
 // @access   Private
 const updateCharacter = async (req, res, next) => {

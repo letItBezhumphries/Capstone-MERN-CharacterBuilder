@@ -7,13 +7,12 @@ import { useGetCharactersQuery } from '../slices/charactersApiSlice';
 const HomeScreen = () => {
   // const { data, error, isLoading } = useGetClassDataQuery('barbarian');
 
-  const { data, isLoading, error } = useGetCharactersQuery();
+  // const { data, isLoading, error } = useGetCharactersQuery();
+  /** BRING IN THE CHARACTERS */
 
-  // const { data, error, isLoading } = useGetDataForRaceQuery('dwarf');
+  const { data, error, isLoading } = useGetMonstersPageQuery(30);
 
-  // const { data, error, isLoading } = useGetMonstersPageQuery(30);
-
-  console.log('in home - getCharacters -> data:', data);
+  console.log('in home - getMonsters -> data:', data);
 
   return <div id='home'>HomeScreen</div>;
 };

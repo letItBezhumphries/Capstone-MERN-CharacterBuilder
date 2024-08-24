@@ -8,6 +8,7 @@ import {
   addNameStep,
   addRaceStep,
 } from './slices/characterFormStepSlice';
+import authSliceReducer from './slices/authSlice';
 
 const rootReducer = combineReducers({
   [backendApi.reducerPath]: backendApi.reducer,
