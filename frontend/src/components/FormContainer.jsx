@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 
 const FormContainer = ({ children, sm }) => {
   return (
@@ -11,7 +11,6 @@ const FormContainer = ({ children, sm }) => {
       }
     >
       <Row className='justify-content-md-center'>
-        {/* <Col>{children}</Col> */}
         <div>{children}</div>
       </Row>
     </Container>

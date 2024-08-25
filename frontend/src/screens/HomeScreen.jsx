@@ -1,20 +1,24 @@
-import React from 'react';
-// import { useGetClassDataQuery } from '../services/classes';
-import { useGetDataForRaceQuery } from '../services/races';
-import { useGetMonstersPageQuery } from '../services/monsters';
-import { useGetCharactersQuery } from '../slices/charactersApiSlice';
+import { useEffect } from 'react';
+import { useGetBackendMonstersQuery } from '../services/backend';
+import StepFormControlWrapper from './CharacterBuilderScreens/StepFormWrapper';
 
 const HomeScreen = () => {
   // const { data, error, isLoading } = useGetClassDataQuery('barbarian');
 
-  // const { data, isLoading, error } = useGetCharactersQuery();
+  const { data, isLoading, error } = useGetBackendMonstersQuery();
   /** BRING IN THE CHARACTERS */
 
-  const { data, error, isLoading } = useGetMonstersPageQuery(30);
+  useEffect(() => {
+    if (!isLoading) {
+      console.log('in homeScreen monsters from my backend:', data);
+    }
+  }, [isLoading]);
 
-  console.log('in home - getMonsters -> data:', data);
-
-  return <div id='home'>HomeScreen</div>;
+  return (
+    <div id='home'>
+      <div className='stepper'>HOME PAGE</div>
+    </div>
+  );
 };
 
 export default HomeScreen;

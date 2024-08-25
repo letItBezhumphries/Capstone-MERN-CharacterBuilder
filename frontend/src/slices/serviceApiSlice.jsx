@@ -4,15 +4,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 
 // import the urls
-import { MONSTERS_APIURL } from '../constants/open5eApiConstants';
+import { BASE_OPEN5E_URL } from '../constants/open5eApiConstants';
 
-const baseQuery = fetchBaseQuery({ baseUrl: MONSTERS_APIURL });
+const baseQuery = fetchBaseQuery({ baseUrl: BASE_OPEN5E_URL });
 
 // tagTypes used to define what data type is being fetched from the api
 
 // endpoints and builder is going to handle the try catch? to make other requests
-export const apiSlice = createApi({
+export const open5eServiceApi = createApi({
   baseQuery,
-  // tagTypes: ['Monster', 'Character', 'User', 'Class', 'Race'],
+  tagTypes: ['Monster', 'Class', 'Race', 'Spells'],
   endpoints: (builder) => ({}),
 });

@@ -107,6 +107,10 @@ function ConfirmationModal({
     }
   }, [isLoading, data]);
 
+  if (!isLoading) {
+    console.log('in MOdal -> race query:', data);
+  }
+
   const handleSelectionClick = () => {
     // create a new object with all properties included
     const selectionData = {

@@ -1,21 +1,19 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { backendApi } from './slices/backendApiSlice';
-import { raceApi } from './services/races';
-import { characterClassApi } from './services/classes';
-import { monstersApi } from './services/monsters';
-import {
-  characterFormStepReducer,
-  addNameStep,
-  addRaceStep,
-} from './slices/characterFormStepSlice';
+import { open5eRaceApi } from './services/races';
+import { open5eClassApi } from './services/classes';
+import { open5eMonstersApi } from './services/monsters';
+import { characterBuilderSliceReducer } from './slices/characterBuilderSlice';
+import { backendMonstersApi } from './services/backend';
 import authSliceReducer from './slices/authSlice';
 
 const rootReducer = combineReducers({
   [backendApi.reducerPath]: backendApi.reducer,
-  [monstersApi.reducerPath]: monstersApi.reducer,
-  [characterClassApi.reducerPath]: characterClassApi.reducer,
-  [raceApi.reducerPath]: raceApi.reducer,
-  characterForm: characterFormStepReducer,
+  [open5eMonstersApi.reducerPath]: open5eMonstersApi.reducer,
+  [open5eClassApi.reducerPath]: open5eClassApi.reducer,
+  [open5eRaceApi.reducerPath]: open5eRaceApi.reducer,
+  [backendMonstersApi.reducerPath]: backendMonstersApi.reducer,
+  characterForm: characterBuilderSliceReducer,
   auth: authSliceReducer,
 });
 
@@ -23,11 +21,12 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(raceApi.middleware)
-      .concat(characterClassApi.middleware)
-      .concat(monstersApi.middleware)
-      .concat(backendApi.middleware),
+      .concat(open5eRaceApi.middleware)
+      .concat(open5eClassApi.middleware)
+      .concat(open5eMonstersApi.middleware)
+      .concat(backendApi.middleware)
+      .concat(backendMonstersApi.middleware),
   devTools: true,
 });
 
-export { store, addNameStep, addRaceStep };
+export { store };

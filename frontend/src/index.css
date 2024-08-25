@@ -201,3 +201,17 @@ td select {
   border: 0.8px solid dodgerblue;
   background-color: antiquewhite;
 }
+
+.form-page-header {
+  font-size: 24px;
+  line-height: 1.2;
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+.confirmation-backdrop {
+}
+
+.filtering-container {
+  width: 80%;
+}

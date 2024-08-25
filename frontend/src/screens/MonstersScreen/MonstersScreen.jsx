@@ -1,17 +1,18 @@
-import React from 'react';
-import {
-  useGetMonstersQuery,
-  useGetMonstersPageLimitQuery,
-} from '../../slices/monstersApiSlice';
+import { useEffect, useState } from 'react';
+import { useGetMonstersPageQuery } from '../../services/monsters';
 
 const MonstersScreen = () => {
   // const monstersResponse = useGetMonstersQuery();
   // const { data, error, isLoading } = useGetMonstersQuery();
   // const { loading, monsters, next, prev } = monstersList;
 
-  const { data, error, isLoading } = useGetMonstersPageLimitQuery(25);
+  const { data, error, isLoading } = useGetMonstersPageQuery(25);
 
-  console.log('monstersList in MonstersScreen:', data);
+  useEffect(() => {
+    if (!isLoading) {
+      console.log('the monsters in MonstersScreen..-> ', data);
+    }
+  }, [isLoading]);
 
   return (
     <>

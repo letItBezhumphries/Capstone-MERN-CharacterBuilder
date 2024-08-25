@@ -3,28 +3,31 @@ import { useState, useEffect } from 'react';
 import CharacterBuilderStepMenu from '../CharacterBuilderStepMenu';
 import ConfirmationModal from '../../../components/ConfirmationModal';
 import FilterOptionItem from '../../../components/FilterOptionItem';
-import FormContainer from '../../../components/FormContainer';
 import CharacterNameForm from '../CharacterNameForm';
 import PageContainer from '../../../components/PageContainer';
+import StepFormControlWrapper from '../StepFormWrapper';
+
 import { characterRaces } from '../../../data/selectors';
 import './ChooseRaceScreen.css';
 
 const ChooseRaceScreen = () => {
-  const [raceToConfirm, setRaceToConfirm] = useState({});
-  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [temporaryRace, setTemporaryRace] = useState({});
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selectedRace, setSelectedRace] = useState({});
 
-  const handleClose = () => setShowConfirmation(false);
+  // closes the modal
+  const handleClose = () => setShowConfirmationModal(false);
 
-  const handleOptionSelect = (race) => {
-    console.log('in handleOptionSelect -> race:', race);
+  /* sets up the ConfirmationModal to open with the race selected to view as a search filter of sorts */
+  const handleRaceFilter = (race) => {
+    console.log('in handleRaceFilter -> race:', race);
     let raceObj = characterRaces.find((r) => r.index === race);
-    setRaceToConfirm({
+    setTemporaryRace({
       name: raceObj.name,
       index: raceObj.index,
       imgSrc: raceObj.imgSrc,
     });
-    setShowConfirmation(true);
+    setShowConfirmationModal(true);
   };
 
   const handleConfirmSelection = (selection) => {
@@ -42,15 +45,19 @@ const ChooseRaceScreen = () => {
   };
 
   const handleCancelSelection = () => {
-    setShowConfirmation(false);
+    setShowConfirmationModal(false);
   };
 
   return (
     <div id='chrace'>
       <CharacterBuilderStepMenu step0 step1></CharacterBuilderStepMenu>
       <CharacterNameForm />
-      {selectedRace?.name && !showConfirmation ? (
-        <FormContainer>
+      {/* if there is a selectedRace.name property and we're not showing the confirmation modal then Return the PageContainer
+        which includes the final race manager options
+        otherwise we should only see the filtering options for selecting the race
+       */}
+      {selectedRace?.name && !showConfirmationModal ? (
+        <StepFormControlWrapper>
           <PageContainer
             isModal={false}
             isRace={true}
@@ -59,36 +66,37 @@ const ChooseRaceScreen = () => {
             traitNames={selectedRace.traitList}
             description={selectedRace.desc}
           />
-        </FormContainer>
+        </StepFormControlWrapper>
       ) : (
-        <FormContainer>
-          <h3 className='form-page-header'>Choose a Race</h3>
-          <div className='race-filtering-container'>
+        <StepFormControlWrapper>
+          <div className='filtering-container'>
             {characterRaces.map((race, idx) => (
               <FilterOptionItem
                 key={race.index}
                 name={race.name}
                 index={race.index}
                 imgsrc={race.imgSrc}
-                onSelectOption={handleOptionSelect}
-                showConfirmation={showConfirmation}
-                optionSelected={raceToConfirm}
+                onSelectOption={handleRaceFilter}
+                showConfirmationModal={showConfirmationModal}
+                optionSelected={temporaryRace}
               />
             ))}
           </div>
-        </FormContainer>
+        </StepFormControlWrapper>
       )}
 
-      <ConfirmationModal
-        show={showConfirmation}
-        onHide={handleClose}
-        isRace={true}
-        isClass={false}
-        selection={raceToConfirm}
-        onSelectionConfirm={handleConfirmSelection}
-        onSelectionCancel={handleCancelSelection}
-        // handleClose={handleClose}
-      />
+      {showConfirmationModal ? (
+        <ConfirmationModal
+          show={showConfirmationModal}
+          onHide={handleClose}
+          isRace={true}
+          isClass={false}
+          selection={temporaryRace}
+          onSelectionConfirm={handleConfirmSelection}
+          onSelectionCancel={handleCancelSelection}
+          // handleClose={handleClose}
+        />
+      ) : null}
     </div>
   );
 };

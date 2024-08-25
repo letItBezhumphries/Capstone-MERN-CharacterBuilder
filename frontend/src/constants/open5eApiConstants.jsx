@@ -1,5 +1,4 @@
-// export const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:'
-
+export const BASE_OPEN5E_URL = 'https://api.open5e.com/';
 export const MONSTERS_APIURL = 'https://api.open5e.com/monsters';
 export const MONSTERS_PAGE_APIURL = 'https://api.open5e.com/monsters/?limit=';
 

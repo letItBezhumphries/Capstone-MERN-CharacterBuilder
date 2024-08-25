@@ -1,14 +1,14 @@
-import ClassNames from 'classnames';
-import { Nav } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import classNames from 'classnames';
+import { Container, Row } from 'react-bootstrap';
 import './StepFormWrapper.css';
 
 function StepFormControlWrapper({ children, className, ...rest }) {
   // add the className prop to the classNames
-  const finalClassNames = classNames('step-form-controls-wrapper', className);
+  // const finalClassNames = classNames('step-form-controls-wrapper', className);
 
   return (
-    <div {...rest} className={finalClassNames}>
+    <Container {...rest} className={'stepper-container'}>
+      {/* <Row className='justify-content-md-center'> */}
       <div className='step-iconbox prev-box'>
         <button className='prev-btn'>
           Prev
@@ -28,7 +28,8 @@ function StepFormControlWrapper({ children, className, ...rest }) {
           ></i>
         </button>
       </div>
-    </div>
+      {/* </Row> */}
+    </Container>
   );
 }
 
