@@ -1,15 +1,15 @@
 const getTableSelectOptions = (tableStr) => {
   let tableHeadCells = getTableHeadVals(tableStr);
-  console.log('tableHead', tableHeadCells);
+  console.log('in utils/ tableHead', tableHeadCells);
 
   let tableCells = getTableCellValues(tableStr);
-  console.log('tableCells:', tableCells);
+  console.log('in utils/ tableCells:', tableCells);
 
   const output = [];
 
   let fixedTitle = tableHeadCells[0];
 
-  console.log('fixedTitle:', fixedTitle);
+  console.log('in utils/ fixedTitle:', fixedTitle);
 
   // iterate over the tableCells
   tableCells.forEach((cell, idx) => {
@@ -25,7 +25,6 @@ const getTableSelectOptions = (tableStr) => {
 };
 
 const getTableHeadVals = (tableStr) => {
-  const output = [];
   let splitTable = tableStr
     .split('|')
     .filter((str) => str.indexOf('-') === -1)

@@ -8,6 +8,11 @@ import PageContainer from '../../../components/PageContainer';
 import StepFormControlWrapper from '../StepFormWrapper';
 import { useGetClassDataQuery } from '../../../services/classes';
 import { characterClasses } from '../../../data/selectors';
+import {
+  parseClassData,
+  parseClassDescription,
+  parseClassTable,
+} from '../../../utility/parseClassData';
 
 const ChooseClassScreen = ({ classes }) => {
   const [temporaryClass, setTemporaryClass] = useState({});
@@ -19,7 +24,7 @@ const ChooseClassScreen = ({ classes }) => {
   /* sets up the ConfirmationModal to open with the race selected to view as a search filter of sorts */
   const handleClassFilterSelect = (classType) => {
     console.log('in handleClassFilterSelect -> class:', classType);
-    let classObj = characterRaces.find((c) => c.index === classType);
+    let classObj = characterClasses.find((c) => c.index === classType);
     setTemporaryClass({
       name: classObj.name,
       index: classObj.index,
@@ -46,9 +51,15 @@ const ChooseClassScreen = ({ classes }) => {
     setShowConfirmationModal(false);
   };
 
-  const { data, error, isLoading } = useGetClassDataQuery('wizard');
+  // const { data, error, isLoading } = useGetClassDataQuery('bard');
 
-  console.log('in home - data:', data);
+  // if (!isLoading) {
+  //   // parseClassTable(data.table);
+  //   let selection = parseClassData(data);
+  //   console.log('selection will look like:', selection);
+  // }
+
+  // console.log('in home - data:', data);
 
   return (
     <div id='chclass'>
@@ -72,6 +83,9 @@ const ChooseClassScreen = ({ classes }) => {
                 index={cls.index}
                 imgsrc={cls.imgSrc}
                 showConfirmationModal={showConfirmationModal}
+                onSelectOption={handleClassFilterSelect}
+                optionSelected={temporaryClass}
+                isRace={false}
               />
             ))}
           </div>
@@ -83,11 +97,10 @@ const ChooseClassScreen = ({ classes }) => {
           show={showConfirmationModal}
           onHide={handleClose}
           isRace={false}
-          isClass={true}
+          // isClass={true}
           selection={temporaryClass}
           onSelectionConfirm={handleConfirmSelection}
           onSelectionCancel={handleCancelSelection}
-          // handleClose={handleClose}
         />
       ) : null}
     </div>

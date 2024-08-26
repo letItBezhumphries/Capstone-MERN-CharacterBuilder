@@ -79,6 +79,7 @@ const ChooseRaceScreen = () => {
                 onSelectOption={handleRaceFilter}
                 showConfirmationModal={showConfirmationModal}
                 optionSelected={temporaryRace}
+                isRace={true}
               />
             ))}
           </div>
@@ -90,11 +91,10 @@ const ChooseRaceScreen = () => {
           show={showConfirmationModal}
           onHide={handleClose}
           isRace={true}
-          isClass={false}
+          // isClass={false}
           selection={temporaryRace}
           onSelectionConfirm={handleConfirmSelection}
           onSelectionCancel={handleCancelSelection}
-          // handleClose={handleClose}
         />
       ) : null}
     </div>

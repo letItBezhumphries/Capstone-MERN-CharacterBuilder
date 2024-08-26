@@ -7,13 +7,11 @@ const FilterOptionItem = ({
   index,
   text,
   onSelectOption,
-  showConfirmation,
-  closeConfirmation,
+  isRace,
   optionSelected,
 }) => {
   const handleSelectionClick = () => {
     onSelectOption(index);
-    // handleShow();
   };
 
   return (
@@ -22,9 +20,11 @@ const FilterOptionItem = ({
         <img src={imgsrc} alt={`depiction of the race of ${name}`} />
         <h3 className='option-heading'>
           <div className='option-name'>{name}</div>
-          <span className='option-text'>
-            {!text ? "Player's Handbook (2014)" : null}
-          </span>
+          {isRace ? (
+            <span className='option-text'>
+              {!text ? "Player's Handbook (2014)" : null}
+            </span>
+          ) : null}
         </h3>
         <div className='option-selector-container'>
           {optionSelected ? (

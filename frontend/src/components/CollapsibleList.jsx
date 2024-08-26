@@ -5,17 +5,15 @@ import { Form } from 'react-bootstrap';
 import ContextAwareToggle from './ContextAwareToggle';
 import CardTable from './CardTable';
 
-const CollapsibleList = ({ items, selection, isModal }) => {
-  console.log(
-    'true dragonboarn in CollapsList',
-    items,
-    'is it a modal:',
-    isModal
-  );
+const CollapsibleList = ({ items, selection, isModal, isRace }) => {
+  if (!isRace) {
+    console.log('in Collaps List -> selection:', selection);
+  } else {
+  }
 
   const renderOptions = (item) => {
     return item.choices.map((choice, idx) => {
-      console.log('choice:', choice);
+      console.log('in CollapsibleList choice:', choice);
       return <option key={idx}>{choice}</option>;
     });
   };
