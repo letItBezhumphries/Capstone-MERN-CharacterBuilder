@@ -1,27 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import CollapsibleList from './CollapsibleList';
 
-const PageList = ({ isRace, isModal, selection }) => {
-  const [classItems, setClassItems] = useState([]);
-
-  if (isRace) {
-    // setClassItems([
-    //   ...selection.features,
-    // ])
-    console.log(
-      'in PageList - features:',
-      selection.features,
-      '\n equipment:',
-      selection.equipment,
-      '\nproficiencies:',
-      selection.proficiencies,
-      '\nhit_points:',
-      selection.hit_points
-    );
+const PageList = ({ isRace, isModal, selection, isLoading, selectedRace }) => {
+  let classItems;
+  if (!isLoading) {
+    classItems = selection.features;
   }
 
-  // console.log('in PageList:', selection);
   return (
     <Row className='full-width-row'>
       <Col className='full-width-col'>
@@ -36,13 +22,17 @@ const PageList = ({ isRace, isModal, selection }) => {
             <CollapsibleList
               items={selection.traits}
               isModal={isModal}
+              isLoading={isLoading}
+              selection={selection}
               isRace={isRace}
             />
           ) : (
             <CollapsibleList
-              items={selection}
+              items={classItems}
               isModal={isModal}
+              isLoading={isLoading}
               isRace={isRace}
+              selection={selection}
             />
           )}
         </div>

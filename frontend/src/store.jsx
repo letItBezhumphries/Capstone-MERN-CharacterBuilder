@@ -4,7 +4,11 @@ import { open5eRaceApi } from './services/races';
 import { open5eClassApi } from './services/classes';
 import { open5eMonstersApi } from './services/monsters';
 import { characterBuilderSliceReducer } from './slices/characterBuilderSlice';
-import { backendMonstersApi } from './services/backend';
+import {
+  backendMonstersApi,
+  backendCharactersApi,
+  backendUsersApi,
+} from './services/backend';
 import authSliceReducer from './slices/authSlice';
 
 const rootReducer = combineReducers({
@@ -13,6 +17,8 @@ const rootReducer = combineReducers({
   [open5eClassApi.reducerPath]: open5eClassApi.reducer,
   [open5eRaceApi.reducerPath]: open5eRaceApi.reducer,
   [backendMonstersApi.reducerPath]: backendMonstersApi.reducer,
+  [backendCharactersApi.reducerPath]: backendCharactersApi.reducer,
+  [backendUsersApi.reducerPath]: backendUsersApi.reducer,
   characterForm: characterBuilderSliceReducer,
   auth: authSliceReducer,
 });
@@ -25,7 +31,9 @@ const store = configureStore({
       .concat(open5eClassApi.middleware)
       .concat(open5eMonstersApi.middleware)
       .concat(backendApi.middleware)
-      .concat(backendMonstersApi.middleware),
+      .concat(backendMonstersApi.middleware)
+      .concat(backendCharactersApi.middleware)
+      .concat(backendUsersApi.middleware),
   devTools: true,
 });
 

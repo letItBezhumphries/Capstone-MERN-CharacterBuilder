@@ -17,7 +17,14 @@ const FilterOptionItem = ({
   return (
     <>
       <div className='filter-option-item' onClick={handleSelectionClick}>
-        <img src={imgsrc} alt={`depiction of the race of ${name}`} />
+        <img
+          src={imgsrc}
+          alt={
+            isRace
+              ? `depiction of the race of ${name}`
+              : `depiction of a ${name} class character`
+          }
+        />
         <h3 className='option-heading'>
           <div className='option-name'>{name}</div>
           {isRace ? (

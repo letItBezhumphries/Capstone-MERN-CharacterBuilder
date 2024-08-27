@@ -32,9 +32,10 @@ export const parseClassTable = (tableStr) => {
   // console.log('tableBody cells:', tableBodyCells);
 
   let first = 0;
-  let last = tableHead.length - 1;
+  let last = tableHead.length;
   let lastCellIndex = tableBodyCells.length - 1;
   while (last <= lastCellIndex) {
+    // console.log('currentRow', tableBodyCells.slice(first, last));
     let currentRow = tableBodyCells.slice(first, last);
     output.push(currentRow);
     first += columns;
@@ -101,6 +102,8 @@ export const parseClassData = (data) => {
   let level1SpellsIndex = table[0].indexOf('1st');
   let level2SpellsIndex = table[0].indexOf('2nd');
 
+  let featuresIdx = table[0].indexOf('Features');
+
   // check if class has spells known for level1 by storing the index of 'Spells Known' from the header cells
   if (spellsKnownIndex > -1) {
     output.spellsKnown = parseInt(table[1][spellsKnownIndex]);
@@ -128,8 +131,11 @@ export const parseClassData = (data) => {
   let descriptions = parseClassDescription(data.desc);
   // console.log('descriptions:', descriptions);
 
-  let featuresList = getFeaturesList(table.slice(1));
-  output.features = featuresList;
+  let featuresList = getFeaturesList(table.slice(1), featuresIdx);
+
+  let final = mergeFeaturesAndDescriptions(featuresList, descriptions);
+
+  output.features = final;
 
   output.table = table;
 
@@ -144,13 +150,14 @@ export const parseClassData = (data) => {
   return output;
 };
 
-export const getFeaturesList = (tableArr) => {
-  // console.log('tableArr:', tableArr);
+export const getFeaturesList = (tableArr, index) => {
+  // console.log('tableArr:', tableArr, 'idx:', index);
   let output = [];
 
   tableArr.forEach((row, idx) => {
-    let currentRowFeatures = row[2];
-    // console.log('currentRow:', currentRowFeatures);
+    // console.log('row:', row, 'index:', index);
+    let currentRowFeatures = row[index];
+    // console.log('current Features:', currentRowFeatures);
     if (currentRowFeatures !== '-') {
       let featuresArray = currentRowFeatures.split(',');
       if (featuresArray.length > 1) {
@@ -302,4 +309,21 @@ const getPrimaryInfo = (name) => {
           'A spellcaster who draws on inherent magic from a gift or bloodline',
       };
   }
+};
+
+const mergeFeaturesAndDescriptions = (features, descriptions) => {
+  let output = [];
+
+  features.forEach((feat) => {
+    let name = feat.name;
+
+    let matchingDescription = descriptions.find((d) => d.name === name);
+
+    if (matchingDescription) {
+      console.log('match:', matchingDescription);
+      output.push({ ...feat, desc: matchingDescription.description });
+    }
+  });
+  // console.log('output:', output);
+  return output;
 };

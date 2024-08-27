@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import CharacterBuilderStepMenu from '../CharacterBuilderStepMenu';
-import ConfirmationModal from '../../../components/ConfirmationModal';
 import FilterOptionItem from '../../../components/FilterOptionItem';
 import CharacterNameForm from '../CharacterNameForm';
 import PageContainer from '../../../components/PageContainer';
 import StepFormControlWrapper from '../StepFormWrapper';
+import ChooseRaceModal from '../../../components/ChooseRaceModal';
 
 import { characterRaces } from '../../../data/selectors';
 import './ChooseRaceScreen.css';
@@ -34,6 +34,8 @@ const ChooseRaceScreen = () => {
     // send the selection to the store selection for race
     // console.log('in handleConfirmSelection:', selection);
     // set the selectedRace
+    console.log('in handle FINAL Selection:', selection);
+
     setSelectedRace({
       name: selection.name,
       index: selection.index,
@@ -61,10 +63,12 @@ const ChooseRaceScreen = () => {
           <PageContainer
             isModal={false}
             isRace={true}
-            selection={selectedRace}
-            traits={selectedRace.traits}
-            traitNames={selectedRace.traitList}
-            description={selectedRace.desc}
+            selectedRace={selectedRace}
+            // selection={selectedRace}
+            // traits={selectedRace.traits}
+            // // HHRERE is THE TRAITLIST
+            // traitNames={selectedRace.traitList}
+            // description={selectedRace.desc}
           />
         </StepFormControlWrapper>
       ) : (
@@ -72,7 +76,7 @@ const ChooseRaceScreen = () => {
           <div className='filtering-container'>
             {characterRaces.map((race, idx) => (
               <FilterOptionItem
-                key={race.index}
+                key={idx}
                 name={race.name}
                 index={race.index}
                 imgsrc={race.imgSrc}
@@ -87,11 +91,10 @@ const ChooseRaceScreen = () => {
       )}
 
       {showConfirmationModal ? (
-        <ConfirmationModal
+        <ChooseRaceModal
           show={showConfirmationModal}
           onHide={handleClose}
           isRace={true}
-          // isClass={false}
           selection={temporaryRace}
           onSelectionConfirm={handleConfirmSelection}
           onSelectionCancel={handleCancelSelection}

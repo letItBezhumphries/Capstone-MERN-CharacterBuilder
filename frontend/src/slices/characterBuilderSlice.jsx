@@ -23,25 +23,28 @@ const initialState = {
     current: 0,
   },
   ability_score_bonuses: [],
+  spells: [],
+  selected_race: {},
+  selected_class: {},
 };
 
 const characterBuilderSlice = createSlice({
   name: 'character-builder',
   initialState: initialState,
   reducers: {
-    characterAddedToBuilder(state, action) {
+    characterAddedToBuilder: (state, action) => {
       const { _id } = action.payload;
       state._id = _id;
     },
-    nameAdded(state, action) {
+    nameAdded: (state, action) => {
       const { name } = action.payload;
       state.name = name;
     },
-    nameUpdated(state, action) {
+    nameUpdated: (state, action) => {
       const { name } = action.payload;
       state.name = name;
     },
-    raceAdded(state, action) {
+    raceAdded: (state, action) => {
       const { race, traits, ability_score_bonuses } = action.payload;
 
       (state.ability_score_bonuses = [
@@ -55,7 +58,7 @@ const characterBuilderSlice = createSlice({
         state[abilityKey] = ab.value;
       });
     },
-    raceUpdated(state, action) {
+    raceUpdated: (state, action) => {
       const { race, traits, ability_score_bonuses } = action.payload;
 
       state.ability_score_bonuses = [
@@ -65,11 +68,11 @@ const characterBuilderSlice = createSlice({
       state.traits = [...state.traits, ...traits];
       state.race = race;
     },
-    traitChosen(state, action) {
+    traitChosen: (state, action) => {
       const { trait } = action.payload;
       state.traits = [...state.traits, trait];
     },
-    traitRemoved(state, action) {
+    traitRemoved: (state, action) => {
       const { trait } = action.payload;
 
       const removedTrait = state.traits.find(
@@ -80,7 +83,7 @@ const characterBuilderSlice = createSlice({
         console.log('removed trait');
       }
     },
-    classAdded(state, action) {
+    classAdded: (state, action) => {
       const {
         class_type,
         equipment,
@@ -89,6 +92,7 @@ const characterBuilderSlice = createSlice({
         traits,
         ability_score_bonuses,
         proficiencies,
+        hit_points,
       } = action.payload;
       state.class_type = class_type;
       state.equipment = [...equipment];
@@ -99,9 +103,12 @@ const characterBuilderSlice = createSlice({
         ...state.ability_score_bonuses,
         ...ability_score_bonuses,
       ];
+      state.hit_points = {
+        ...hit_points,
+      };
       state.proficiencies = [...state.proficiencies, ...proficiencies];
     },
-    classUpdated(state, action) {
+    classUpdated: (state, action) => {
       const {
         class_type,
         equipment,
@@ -121,7 +128,7 @@ const characterBuilderSlice = createSlice({
       ];
       state.proficiencies = [...state.proficiencies, ...proficiencies];
     },
-    abilitiesAdded(state, action) {
+    abilitiesAdded: (state, action) => {
       const {
         strength,
         dexterity,
@@ -138,7 +145,7 @@ const characterBuilderSlice = createSlice({
       state.wisdom = state.wisdom + wisdom;
       state.charisma = state.charisma + charisma;
     },
-    abilitiesUpdated(state, action) {
+    abilitiesUpdated: (state, action) => {
       const {
         strength,
         dexterity,
@@ -160,6 +167,24 @@ const characterBuilderSlice = createSlice({
       state.wisdom = state.wisdom + wisdom;
       state.charisma = state.charisma + charisma;
     },
+    setFilteredRace: (state, action) => {
+      state.selected_race = {
+        ...state.selected_race,
+        ...action.payload,
+      };
+    },
+    setFilteredClass: (state, action) => {
+      state.selected_class = {
+        ...state.selected_class,
+        ...action.payload,
+      };
+    },
+    clearFilteredRace: (state) => {
+      state.selected_race = initialState.selected_race;
+    },
+    clearFilteredClass: (state) => {
+      state.selected_class = initialState.selected_class;
+    },
   },
 });
 
@@ -173,5 +198,9 @@ export const {
   classUpdated,
   abilitiesAdded,
   abilitiesUpdated,
+  setFilteredClass,
+  setFilteredRace,
+  clearFilteredClass,
+  clearFilteredRace,
 } = characterBuilderSlice.actions;
 export const characterBuilderSliceReducer = characterBuilderSlice.reducer;

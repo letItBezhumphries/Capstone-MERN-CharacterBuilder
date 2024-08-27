@@ -11,7 +11,7 @@ function ContextAwareToggle({ children, eventKey, callback, item, isModal }) {
     () => callback && callback(eventKey)
   );
 
-  console.log('item in ContextAwareToggle:', item);
+  // console.log('item in ContextAwareToggle:', item);
 
   const isCurrentEventKey = activeEventKey === eventKey;
 

@@ -1,8 +1,27 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Row, Col } from 'react-bootstrap';
+// import { useNavigation } from 'react-router-dom';
 
-const PageIntro = ({ isRace, isModal, selection, isLoading }) => {
-  console.log('in PageIntro -> selection:', selection);
+const PageIntro = ({
+  isRace,
+  isModal,
+  selection,
+  isLoading,
+  selectedRace,
+  selectedClass,
+}) => {
+  const [raceData, setRaceData] = useState({});
+  // console.log('in PageIntro -> selection:', selection);
+  useEffect(() => {
+    if (selectedRace?.name && !isModal) {
+      console.log('in useEffect ', selectedRace);
+      setRaceData({ ...selectedRace });
+    } else {
+      setRaceData({ ...selectedClass });
+    }
+  }, [selectedRace]);
+
   return (
     <>
       <Row className={isModal ? 'confirmation-primary' : 'overview-primary'}>
@@ -11,16 +30,22 @@ const PageIntro = ({ isRace, isModal, selection, isLoading }) => {
           md={8}
           className={isModal ? 'confirmation-info' : 'selection-info'}
         >
-          <div className='form-page-header'>{selection.name}</div>
+          <div className='form-page-header'>
+            {selectedRace ? raceData.name : selection.name}
+          </div>
           <p className='description'>
-            {isRace ? selection.desc : selection.primary_desc}
+            {selectedRace && isRace
+              ? raceData.desc
+              : !isRace
+              ? selection.primary_desc
+              : selection.desc}
           </p>
           {!isModal ? (
             <p className='traitlist'>
               <strong>{isRace ? `Race Traits:` : null}</strong>
               <span>
-                {isRace && selection.traitNames.length > 0
-                  ? `${selection.traitNames.join(', ')}`
+                {selectedRace && selectedRace.traitNames.length > 0
+                  ? `${selectedRace.traitNames.join(', ')}`
                   : null}
               </span>
             </p>
@@ -32,13 +57,15 @@ const PageIntro = ({ isRace, isModal, selection, isLoading }) => {
           className={isModal ? 'confirmation-aside' : 'selection-aside'}
         >
           <img
-            src={selection.imgSrc}
+            src={selectedRace ? selectedRace.imgSrc : selection.imgSrc}
             className={isModal ? 'confirmation-img' : 'selection-img'}
           />
           {/* MIGHT NEED TO ADD redux action here */}
           {!isModal ? (
             <LinkContainer to='/character/chrace'>
-              <button className='change-race-btn'>Change Race</button>
+              <button className='change-race-btn'>
+                {isRace ? 'Change Race' : 'Change Class'}
+              </button>
             </LinkContainer>
           ) : null}
         </Col>

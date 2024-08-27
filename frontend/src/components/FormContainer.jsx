@@ -1,16 +1,23 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 
-const FormContainer = ({ children, sm }) => {
+const FormContainer = ({ children, sm, width, centered }) => {
   return (
     <Container
       style={
         sm === true
           ? { height: '30%', marginBottom: '40px' }
-          : { height: '100%', marginBottom: '20px' }
+          : {
+              height: '100%',
+              marginBottom: '20px',
+              width: width ? width : '60%',
+              backgroundColor: 'pink',
+            }
       }
     >
-      <Row className='justify-content-md-center'>
+      <Row
+        className={centered ? 'justify-content-md-center' : 'page-container'}
+      >
         <div>{children}</div>
       </Row>
     </Container>

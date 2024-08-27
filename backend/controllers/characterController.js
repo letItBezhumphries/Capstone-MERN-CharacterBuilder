@@ -12,11 +12,7 @@ const getCharacters = async (req, res, next) => {
     console.log('GET all characters:', characters);
 
     if (characters) {
-      res.status(200).render('characters', {
-        page_title: 'Characters of the multiverse!',
-        autheticated: false,
-        characters: characters,
-      });
+      res.status(200).json(characters);
     } else {
       next();
     }
@@ -36,11 +32,6 @@ const getCharacterById = async (req, res, next) => {
 
     if (character) {
       res.status(200).json(character);
-      // res.status(200).render('character', {
-      //   page_title: `${character.name} details`,
-      //   autheticated: true,
-      //   character: character,
-      // });
     } else {
       next();
     }
@@ -72,11 +63,6 @@ const createNewCharacter = async (req, res, next) => {
 
     if (createdCharacter) {
       res.status(201).json(newCharacter);
-      // res.status(201).render('character', {
-      //   page_title: `${newCharacter.name} was just created`,
-      //   autheticated: true,
-      //   character: newCharacter,
-      // });
     } else {
       next();
     }
@@ -105,11 +91,6 @@ const updateCharacter = async (req, res, next) => {
       character.img = img;
 
       const updatedCharacter = await character.save();
-      // res.status(203).render('character', {
-      //   page_title: `${updatedCharacter.name} was just updated`,
-      //   autheticated: true,
-      //   character: updatedCharacter,
-      // });
       res.status(203).json(updatedCharacter);
     } else {
       next();
@@ -130,11 +111,7 @@ const deleteCharacter = async (req, res, next) => {
 
     if (character) {
       await character.remove();
-      // res.status(204).render('character', {
-      //   page_title: `${character.name} was just deleted`,
-      //   authenticated: true,
-      //   character: character,
-      // });
+
       res.status(204).json(character);
     } else {
       next();

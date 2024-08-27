@@ -1,16 +1,20 @@
 import { useEffect } from 'react';
-import { useGetBackendMonstersQuery } from '../services/backend';
+import { useGetBackendCharactersQuery } from '../services/backend';
+
 import StepFormControlWrapper from './CharacterBuilderScreens/StepFormWrapper';
 
 const HomeScreen = () => {
   // const { data, error, isLoading } = useGetClassDataQuery('barbarian');
 
-  const { data, isLoading, error } = useGetBackendMonstersQuery();
+  const { data, isLoading, error } = useGetBackendCharactersQuery();
   /** BRING IN THE CHARACTERS */
 
   useEffect(() => {
     if (!isLoading) {
-      console.log('in homeScreen monsters from my backend:', data);
+      console.log(
+        'in homeScreen monsters from my characters from my backend:',
+        data
+      );
     }
   }, [isLoading]);
 

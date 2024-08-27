@@ -1,8 +1,9 @@
+//
 function parseTraits(traits, selection) {
   let parsedTraits = traits.split(/\*\*\_/).filter((str) => str.length > 0);
 
-  parsedTraits.forEach((str, index) => {
-    if (selection.index === 'dragonborn') {
+  parsedTraitsArray.forEach((str, index) => {
+    if (race === 'dragonborn') {
       if (index > 0) {
         if (index === 1) {
           let name = str.split('._**')[0];

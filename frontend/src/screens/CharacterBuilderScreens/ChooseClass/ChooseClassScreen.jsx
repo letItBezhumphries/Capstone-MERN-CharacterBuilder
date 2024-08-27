@@ -1,23 +1,25 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router-dom';
 import CharacterBuilderStepMenu from '../CharacterBuilderStepMenu';
-import ConfirmationModal from '../../../components/ConfirmationModal';
+import ChooseClassModal from '../../../components/ChooseClassModal';
+// import ConfirmationModal from '../../../components/ConfirmationModal';
 import FilterOptionItem from '../../../components/FilterOptionItem';
 import CharacterNameForm from '../CharacterNameForm';
 import PageContainer from '../../../components/PageContainer';
 import StepFormControlWrapper from '../StepFormWrapper';
-import { useGetClassDataQuery } from '../../../services/classes';
+import { setFilteredClass } from '../../../slices/characterBuilderSlice';
+
+// import { useGetClassDataQuery } from '../../../services/classes';
+
 import { characterClasses } from '../../../data/selectors';
-import {
-  parseClassData,
-  parseClassDescription,
-  parseClassTable,
-} from '../../../utility/parseClassData';
 
 const ChooseClassScreen = ({ classes }) => {
   const [temporaryClass, setTemporaryClass] = useState({});
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selectedClass, setSelectedClass] = useState({});
+  const dispatch = useDispatch();
 
   const handleClose = () => setShowConfirmationModal(false);
 
@@ -43,6 +45,15 @@ const ChooseClassScreen = ({ classes }) => {
       imgSrc: selection.imgSrc,
       ...selection,
     });
+
+    dispatch(
+      setFilteredClass({
+        name: selection.name,
+        index: selection.index,
+        imgSrc: selection.imgSrc,
+        ...selection,
+      })
+    );
     // close the Confirmation Model
     handleClose();
   };
@@ -93,7 +104,7 @@ const ChooseClassScreen = ({ classes }) => {
       )}
 
       {showConfirmationModal ? (
-        <ConfirmationModal
+        <ChooseClassModal
           show={showConfirmationModal}
           onHide={handleClose}
           isRace={false}

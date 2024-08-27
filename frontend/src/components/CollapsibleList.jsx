@@ -5,11 +5,13 @@ import { Form } from 'react-bootstrap';
 import ContextAwareToggle from './ContextAwareToggle';
 import CardTable from './CardTable';
 
-const CollapsibleList = ({ items, selection, isModal, isRace }) => {
-  if (!isRace) {
-    console.log('in Collaps List -> selection:', selection);
-  } else {
-  }
+const CollapsibleList = ({ items, selection, isModal, isRace, isLoading }) => {
+  // let classItems;
+  // if (!) {
+
+  //   console.log('in Collaps List -> selection:', selection);
+  // } else {
+  // }
 
   const renderOptions = (item) => {
     return item.choices.map((choice, idx) => {
@@ -28,7 +30,12 @@ const CollapsibleList = ({ items, selection, isModal, isRace }) => {
         <Card key={idx}>
           <Card.Header>
             <ContextAwareToggle eventKey={idx} item={item}>
-              {item.name}
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span>{item.name}</span>
+                <span style={{ fontSize: '12px' }}>
+                  {!isRace ? `level ${item.level} ` : null}
+                </span>
+              </div>
             </ContextAwareToggle>
           </Card.Header>
           <Accordion.Collapse eventKey={idx}>
