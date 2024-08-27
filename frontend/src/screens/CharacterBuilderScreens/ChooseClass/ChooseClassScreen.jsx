@@ -15,7 +15,7 @@ import { setFilteredClass } from '../../../slices/characterBuilderSlice';
 
 import { characterClasses } from '../../../data/selectors';
 
-const ChooseClassScreen = ({ classes }) => {
+const ChooseClassScreen = ({}) => {
   const [temporaryClass, setTemporaryClass] = useState({});
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selectedClass, setSelectedClass] = useState({});
